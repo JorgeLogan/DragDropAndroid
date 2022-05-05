@@ -4,107 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Juego"
-    android:gravity="center"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    tools:context=".Juego">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.example.actividad2_1.FichaJuego
+        android:id="@+id/ficha1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/forma_redondeada"
         android:foregroundGravity="center"
-        android:gravity="center_horizontal">
+        android:src="@drawable/ic_launcher_foreground" />
 
-        <com.example.actividad2_1.FichaJuego
-            android:id="@+id/ficha1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/forma_redondeada"
-            android:foregroundGravity="center"
-            android:src="@drawable/ic_launcher_foreground" />
+    <com.example.actividad2_1.FichaJuego
+        android:id="@+id/ficha2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/ficha1"
+        android:layout_toRightOf="@+id/ficha1"
+        android:background="@drawable/forma_redondeada"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_launcher_foreground" />
 
-        <Space
-            android:layout_width="@dimen/medio"
-            android:layout_height="@dimen/medio"/>
-
-        <com.example.actividad2_1.FichaJuego
-            android:id="@+id/ficha2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/forma_redondeada"
-            android:foregroundGravity="center"
-            android:src="@drawable/ic_launcher_foreground" />
-
-        <Space
-            android:layout_width="@dimen/medio"
-            android:layout_height="@dimen/medio"/>
-
-        <com.example.actividad2_1.FichaJuego
-            android:id="@+id/ficha3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/forma_redondeada"
-            android:foregroundGravity="center"
-            android:src="@drawable/ic_launcher_foreground" />
-    </LinearLayout>
+    <com.example.actividad2_1.FichaJuego
+        android:id="@+id/ficha3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/ficha2"
+        android:layout_toRightOf="@+id/ficha2"
+        android:background="@drawable/forma_redondeada"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_launcher_foreground" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/ivDestino1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/forma_redondeada"
+        android:contentDescription="@string/ivdestino1"
         android:foregroundGravity="center"
-        android:gravity="center_horizontal">
+        app:srcCompat="@mipmap/logan_0_foreground" />
 
-        <ImageView
-            android:id="@+id/ivDestino1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/forma_redondeada"
-            android:contentDescription="ivDestino1"
-            android:foregroundGravity="center"
-            app:srcCompat="@mipmap/logan_0_foreground" />
+    <ImageView
+        android:id="@+id/ivDestino2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toEndOf="@+id/ivDestino3"
+        android:layout_toRightOf="@+id/ivDestino3"
+        android:background="@drawable/forma_redondeada"
+        android:contentDescription="@string/ivdestino1"
+        android:foregroundGravity="center"
+        android:scaleType="centerInside"
+        app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
-        <Space
-            android:layout_width="@dimen/medio"
-            android:layout_height="@dimen/medio" />
-
-        <ImageView
-            android:id="@+id/ivDestino2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/forma_redondeada"
-            android:contentDescription="ivDestino1"
-            android:foregroundGravity="center"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-        <Space
-            android:layout_width="@dimen/medio"
-            android:layout_height="@dimen/medio" />
-
-        <ImageView
-            android:id="@+id/ivDestino3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/forma_redondeada"
-            android:contentDescription="ivDestino1"
-            android:foregroundGravity="center"
-            app:srcCompat="@android:drawable/presence_video_away" />
-
-
-    </LinearLayout>
-
-
-
+    <ImageView
+        android:id="@+id/ivDestino3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_toEndOf="@+id/ivDestino1"
+        android:layout_toRightOf="@+id/ivDestino1"
+        android:background="@drawable/forma_redondeada"
+        android:contentDescription="@string/ivdestino1"
+        android:foregroundGravity="center"
+        app:srcCompat="@android:drawable/presence_video_away" />
 
 </RelativeLayout>
