@@ -33,7 +33,7 @@ public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
     public void setImagenDestino(ImageView imagenDestino) {
         this.imagenDestino = imagenDestino;
 
-        this.setBackground(imagenDestino.getBackground());
+        this.setImageDrawable(imagenDestino.getDrawable());
     }
 
 
