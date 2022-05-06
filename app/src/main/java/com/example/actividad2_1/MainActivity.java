@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,14 +18,11 @@ import android.widget.ImageView;
  */
 public class MainActivity extends AppCompatActivity{
     SonidoRecursos sonido;
-    AnimadorImagenes animadorLogan;
     ImageView ivLogan;
-    int[] imgsReposo;
-    int[]imgsLadrando;
     Button btnEmpezar;
     Button btnSalir;
     boolean iniciado = false; // Para que la animacion solo se cree una vez al inicio
-
+    AnimationDrawable loganAnim;
     private long retardoActivity = 2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +34,14 @@ public class MainActivity extends AppCompatActivity{
         btnSalir= (Button)findViewById(R.id.btnSalir);
 
         // Preparamos el sonido del boton
-        sonido = new SonidoRecursos(this, R.raw.ladrido, 500);
+        sonido = new SonidoRecursos(this, R.raw.ladrido, 200);
         // Capturamos el ImageView
         ivLogan = (ImageView)findViewById(R.id.ivLogan);
 
-        // Creamos las animaciones de reposo y de ladrido
-        imgsReposo = new int[]{R.raw.logan3,R.raw.logan4, R.raw.logan5};
-        imgsLadrando = new int[]{R.raw.logan0,  R.raw.logan1, R.raw.logan2, R.raw.logan2,
-                R.raw.logan1, R.raw.logan2, R.raw.logan2, R.raw.logan1, R.raw.logan0};
-
-        // Creamos un objeto de la clase que anima imagenes, pasandole el contexto, pedido por el
-        // SurfaceView padre, el ImageView contenedor, y las animaciones de reposo y accion
-        animadorLogan = new AnimadorImagenes(this, ivLogan, imgsReposo, imgsLadrando);
+        // Creamos unos animation drawable para la imagen de loganin en reposo
+        ivLogan.setBackgroundResource(R.drawable.anim_reposo);
+        loganAnim = (AnimationDrawable) ivLogan.getBackground();
+        loganAnim.start();
 
         // Damos funcionamiento al boton para que anime a Loganin
         btnEmpezar.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +51,12 @@ public class MainActivity extends AppCompatActivity{
                 btnEmpezar.setVisibility(View.INVISIBLE);
                 btnSalir.setVisibility(View.INVISIBLE);
 
-                // Iniciamos la animacion y el sonido
-                animadorLogan.animar();
+                // Paramos la anim actual, iniciamos la animacion de ladrido, y el sonido
+                loganAnim.stop();
+                ivLogan.setBackgroundResource(R.drawable.anim_ladrando);
+                loganAnim = (AnimationDrawable)ivLogan.getBackground();
+                loganAnim.setOneShot(true);
+                loganAnim.start();
                 sonido.sonar();
 
                // Pedimos iniciar la actividad del juego mediante el delay que declaramos al final
@@ -80,7 +78,6 @@ public class MainActivity extends AppCompatActivity{
     // Creo una clase publica para iniciar la actividad cuando se acabe el sonido o la animacion
     // Segun nos convenga, en este caso, el sonido
     public void iniciarJuego(){
-        this.animadorLogan.cerrar();
         Intent intent = new Intent(this, Juego.class);
         startActivityForResult(intent, 100);
     }
@@ -99,24 +96,18 @@ public class MainActivity extends AppCompatActivity{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             iniciarJuego();
         }
     }
 
 
-    /**
-     * Hago una sobreescritura de onResume para que la animacion del perrin vuelva a funcionar si
-     * vuelve de la actividad de juego (no me dio fallos haciendo otras pruebas aun)
-     */
+    // Sobreescribo metodo para reactivar la animacion
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("Pruebas", "On resume activado");
-        if(this.animadorLogan!= null && this.animadorLogan.isAcabado()){
-            Log.d("Pruebas", "Activada la nueva animacion");
-            animadorLogan = new AnimadorImagenes(this, ivLogan, imgsReposo, imgsLadrando);
-        }
+        ivLogan.setBackgroundResource(R.drawable.anim_reposo);
+        loganAnim = (AnimationDrawable)ivLogan.getBackground();
+        loganAnim.start();
     }
 
 
