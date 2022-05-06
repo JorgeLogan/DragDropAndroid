@@ -2,20 +2,15 @@ package com.example.actividad2_1;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.animation.Animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Application;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,17 +18,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class Juego extends AppCompatActivity{
     ImageView inDestino1;
@@ -48,7 +38,7 @@ public class Juego extends AppCompatActivity{
     MediaPlayer mp;
     int intentos = 0;
     int conseguidos = 0;
-    RelativeLayout rl;
+    ConstraintLayout cl;
     LinearLayout llBotones;
     Button btnVolver, btnSalir, btnJugar;
 
@@ -98,7 +88,7 @@ public class Juego extends AppCompatActivity{
         tvBravo = (TextView)findViewById(R.id.tvBravo);
 
         // El layout para el fondo y el de botones
-        this.rl = (RelativeLayout)findViewById(R.id.rl);
+        this.cl = (ConstraintLayout)findViewById(R.id.cl);
         this.llBotones = (LinearLayout)findViewById(R.id.llBotones);
         this.btnJugar = (Button)findViewById(R.id.btnVolverJugar);
         this.btnVolver = (Button) findViewById(R.id.btnInicio);
@@ -201,7 +191,7 @@ public class Juego extends AppCompatActivity{
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
-                rl.setBackgroundColor((int) animator.getAnimatedValue());
+                cl.setBackgroundColor((int) animator.getAnimatedValue());
             }
         });
 
@@ -240,7 +230,7 @@ public class Juego extends AppCompatActivity{
         animColor.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                rl.setBackgroundColor((int) animColor.getAnimatedValue());
+                cl.setBackgroundColor((int) animColor.getAnimatedValue());
             }
         });
         animColor.start();

@@ -1,13 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl"
+    android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:foregroundGravity="center_horizontal"
     android:gravity="center_horizontal"
+    app:layout_anchorGravity="center|center_horizontal"
     tools:context=".Juego">
+
+    <com.example.actividad2_1.Lienzo
+        android:id="@+id/ivLienzo4"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:background="@color/transparente"
+        app:layout_constraintBottom_toBottomOf="@+id/ficha1"
+        app:layout_constraintEnd_toEndOf="@+id/ficha1"
+        app:layout_constraintStart_toStartOf="@+id/ficha1"
+        app:layout_constraintTop_toTopOf="@+id/ficha1"
+        app:srcCompat="?android:attr/fastScrollTrackDrawable" />
+
+    <com.example.actividad2_1.Lienzo
+        android:id="@+id/ivLienzo2"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:background="@color/transparente"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDestino3"
+        app:layout_constraintEnd_toEndOf="@+id/ivDestino3"
+        app:layout_constraintStart_toStartOf="@+id/ivDestino3"
+        app:layout_constraintTop_toTopOf="@+id/ivDestino3"
+        app:srcCompat="?android:attr/fastScrollTrackDrawable" />
+
+    <com.example.actividad2_1.Lienzo
+        android:id="@+id/ivLienzo6"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:background="@color/transparente"
+        app:layout_constraintBottom_toBottomOf="@+id/ficha2"
+        app:layout_constraintEnd_toEndOf="@+id/ficha2"
+        app:layout_constraintStart_toStartOf="@+id/ficha2"
+        app:layout_constraintTop_toTopOf="@+id/ficha2"
+        app:srcCompat="?android:attr/fastScrollTrackDrawable" />
+
+    <com.example.actividad2_1.Lienzo
+        android:id="@+id/ivLienzo3"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:background="@color/transparente"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDestino2"
+        app:layout_constraintEnd_toEndOf="@+id/ivDestino2"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/ivDestino2"
+        app:layout_constraintTop_toTopOf="@+id/ivDestino2"
+        app:srcCompat="?android:attr/fastScrollTrackDrawable" />
+
+    <com.example.actividad2_1.Lienzo
+        android:id="@+id/ivLienzo"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:background="@color/transparente"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDestino1"
+        app:layout_constraintEnd_toEndOf="@+id/ivDestino1"
+        app:layout_constraintStart_toStartOf="@+id/ivDestino1"
+        app:layout_constraintTop_toTopOf="@+id/ivDestino1"
+        app:srcCompat="?android:attr/fastScrollTrackDrawable" />
+
+    <com.example.actividad2_1.Lienzo
+        android:id="@+id/ivLienzo5"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:background="@color/transparente"
+        app:layout_constraintBottom_toBottomOf="@+id/ficha3"
+        app:layout_constraintEnd_toEndOf="@+id/ficha3"
+        app:layout_constraintStart_toStartOf="@+id/ficha3"
+        app:layout_constraintTop_toTopOf="@+id/ficha3"
+        app:srcCompat="?android:attr/fastScrollTrackDrawable" />
 
     <TextView
         android:id="@+id/txtIntentos"
@@ -16,15 +85,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:foregroundGravity="center"
         android:gravity="center"
         android:text="@string/intentos"
         android:textColor="@color/purple_700"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtNumIntentos"
@@ -33,34 +105,37 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="180dp"
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="0"
+        android:text="@string/_0"
         android:textColor="@color/purple_700"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvBravo"
         android:layout_width="147dp"
         android:layout_height="38dp"
         android:layout_below="@+id/ficha2"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="73dp"
-        android:layout_marginEnd="-48dp"
-        android:layout_marginRight="-48dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="148dp"
         android:layout_toStartOf="@+id/ficha3"
         android:layout_toLeftOf="@+id/ficha3"
         android:layout_toEndOf="@+id/ficha1"
         android:layout_toRightOf="@+id/ficha1"
+        android:foregroundGravity="center"
         android:gravity="center"
         android:text="@string/bravo"
         android:textColor="@color/transparente"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.actividad2_1.FichaJuego
         android:id="@+id/ficha1"
@@ -69,55 +144,65 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
         android:background="@drawable/forma_redondeada"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toStartOf="@+id/ficha2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.actividad2_1.FichaJuego
         android:id="@+id/ficha2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="60dp"
         android:layout_toEndOf="@+id/ficha1"
         android:layout_toRightOf="@+id/ficha1"
         android:background="@drawable/forma_redondeada"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.actividad2_1.FichaJuego
         android:id="@+id/ficha3"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="60dp"
         android:layout_toEndOf="@+id/ficha2"
         android:layout_toRightOf="@+id/ficha2"
         android:background="@drawable/forma_redondeada"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintStart_toEndOf="@+id/ficha2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
         android:id="@+id/llBotones"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_width="281dp"
+        android:layout_height="204dp"
         android:layout_above="@+id/ivDestino3"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="180dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnVolverJugar"
@@ -160,12 +245,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/forma_redondeada"
         android:contentDescription="@string/ivdestino1"
         android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivDestino3"
         app:srcCompat="@mipmap/logan_0_foreground" />
 
     <ImageView
@@ -173,15 +260,17 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="60dp"
         android:layout_toEndOf="@+id/ivDestino3"
         android:layout_toRightOf="@+id/ivDestino3"
         android:background="@drawable/forma_redondeada"
         android:contentDescription="@string/ivdestino1"
         android:foregroundGravity="center"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivDestino3"
         app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
     <ImageView
@@ -189,14 +278,15 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="60dp"
         android:layout_toEndOf="@+id/ivDestino1"
         android:layout_toRightOf="@+id/ivDestino1"
         android:background="@drawable/forma_redondeada"
         android:contentDescription="@string/ivdestino1"
         android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/presence_video_away" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

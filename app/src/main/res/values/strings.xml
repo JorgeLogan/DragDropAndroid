@@ -12,5 +12,6 @@
     <string name="salir">Salir</string>
     <string name="volverjugar">Volver a jugar</string>
     <string name="pantalla_inicio">Volver a inicio</string>
+    <string name="_0">0</string>
 
 </resources>
