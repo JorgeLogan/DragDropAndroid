@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity{
         btnEmpezar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Como va a tener un delay, quito los botones
+                btnEmpezar.setVisibility(View.INVISIBLE);
+                btnSalir.setVisibility(View.INVISIBLE);
+
                 // Iniciamos la animacion y el sonido
                 animadorLogan.animar();
                 sonido.sonar();
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity{
         });
         this.iniciado = true;
     }
+
 
     // Creo una clase publica para iniciar la actividad cuando se acabe el sonido o la animacion
     // Segun nos convenga, en este caso, el sonido
@@ -99,6 +104,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+
     /**
      * Hago una sobreescritura de onResume para que la animacion del perrin vuelva a funcionar si
      * vuelve de la actividad de juego (no me dio fallos haciendo otras pruebas aun)
@@ -113,11 +119,19 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+
+    // Metodo llamado al volver de la actividad de juego.
+    // Si el juego ha retornado un valor de 100, saldra del juego
+    // Si ha sido 1000, volvera a jugar
+    // Si ha sido 2000, se quedara en esta pantalla
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 100 && resultCode == RESULT_OK)  this.finish();
         else if(requestCode == 100 && resultCode == 1000)  this.iniciarJuego();
+
+        this.btnEmpezar.setVisibility(View.VISIBLE);
+        this.btnSalir.setVisibility(View.VISIBLE);
     }
 }

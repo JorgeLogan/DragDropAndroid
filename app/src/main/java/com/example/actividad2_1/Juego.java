@@ -28,6 +28,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class Juego extends AppCompatActivity{
     ImageView inDestino1;
@@ -46,6 +52,7 @@ public class Juego extends AppCompatActivity{
     LinearLayout llBotones;
     Button btnVolver, btnSalir, btnJugar;
 
+    // Metodo llamado al crear la vista de la actividad
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +73,23 @@ public class Juego extends AppCompatActivity{
         inDestino2 = (ImageView) findViewById(R.id.ivDestino2);
         inDestino3 = (ImageView) findViewById(R.id.ivDestino3);
 
-        // Buscamos las fichas y les asignamos un destino
+        // Buscamos las fichas
         ficha1 = (FichaJuego)findViewById(R.id.ficha1);
-        ficha1.setImagenDestino(inDestino1);
         ficha2 = (FichaJuego)findViewById(R.id.ficha2);
-        ficha2.setImagenDestino(inDestino2);
         ficha3 = (FichaJuego)findViewById(R.id.ficha3);
-        ficha3.setImagenDestino(inDestino3);
+
+        // Para un orden aleatorio de las fichas de destino
+        List<FichaJuego> listadoFichas = new LinkedList<FichaJuego>();
+        listadoFichas.add(ficha1);
+        listadoFichas.add(ficha2);
+        listadoFichas.add(ficha3);
+
+        // Desordenamos la lista con Collections.shuffle
+        Collections.shuffle(listadoFichas);
+        listadoFichas.get(0).setImagenDestino(inDestino1);
+        listadoFichas.get(1).setImagenDestino(inDestino2);
+        listadoFichas.get(2).setImagenDestino(inDestino3);
+
 
         // Preparamos los textview
         tvIntentoTxt = (TextView)findViewById(R.id.txtIntentos);
@@ -87,7 +104,7 @@ public class Juego extends AppCompatActivity{
         this.btnVolver = (Button) findViewById(R.id.btnInicio);
         this.btnSalir = (Button) findViewById(R.id.btnSalirJuego);
 
-        // Damos funcionalidad a los botones
+        // Damos funcionalidad a los botones. Empezamos por el de volver a jugar
         this.btnJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +114,7 @@ public class Juego extends AppCompatActivity{
             }
         });
 
+        // Funcionalidad al boton de salir
         this.btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +124,7 @@ public class Juego extends AppCompatActivity{
             }
         });
 
+        // Funcionalidad al boton de volver a inicio
         this.btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +133,6 @@ public class Juego extends AppCompatActivity{
                 finish();
             }
         });
-
     }
 
 
@@ -169,32 +187,39 @@ public class Juego extends AppCompatActivity{
         animacionFondoMal();
     }
 
-
+    // Metodo para animar el fondo de la pantalla cuando no se llego a destino
     private void animacionFondoMal(){
+        // Preparamos la animacion tween sobre el texto de intentos y la ejecutamos
         Animation animacion = AnimationUtils.loadAnimation(this, R.anim.anim_ficha_mal);
         this.tvIntentoTxt.startAnimation(animacion);
 
+        // Preparamos una animacion para el color de fondo de la pantalla
         int rojo = getResources().getColor(R.color.rojo);
         int blanco = getResources().getColor(R.color.white);
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), rojo, blanco);
         colorAnimation.setDuration(500);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
                 rl.setBackgroundColor((int) animator.getAnimatedValue());
             }
         });
+
+        // Iniciamos la animacion
         colorAnimation.start();
     }
 
+
+    // Metodo para conseguir la animacion final cuando todas las fichas llegaron a destino
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void animacionFinalOK(){
-        this.animarFondoOK();
-        this.animarBravo();
+        this.animarFondoOK(); // Hacemos la animacion del fondo
+        this.animarBravo(); // Hacemos la animacion del texto de bravo
 
+        // Hacemos visible el panel de botones
         this.llBotones.setVisibility(View.VISIBLE);
 
+        // Damos una animacion tween a los botones para darle un poco de efecto
         Animation animBoton =  AnimationUtils.loadAnimation(this, R.anim.anim_botones);
         animBoton.setDuration(1000);
         this.btnSalir.startAnimation(animBoton);
@@ -203,12 +228,13 @@ public class Juego extends AppCompatActivity{
     }
 
 
+    // Metodo para animar el color de fondo cuando la ficha llega a destino
     private void animarFondoOK() {
-        // Para la animacion del fondo
+        // Para la animacion del color de fondo necesitamos los colores a usar
         int verde = getResources().getColor(R.color.verde);
         int blanco = getResources().getColor(R.color.white);
 
-        // Animamos el color del fondo
+        // Animamos el color del fondo con un ValueAnimator
         ValueAnimator animColor = ValueAnimator.ofObject(new ArgbEvaluator(), Color.GREEN, Color.WHITE);
         animColor.setDuration(2000);
         animColor.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -220,13 +246,15 @@ public class Juego extends AppCompatActivity{
         animColor.start();
     }
 
+
+    // Metodo para animar el textview de bravo cuando se acaba el juego
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void animarBravo(){
         // Para la animacion del texto
         int transparente = getResources().getColor(R.color.transparente);
         int negro = getResources().getColor(R.color.black);
 
-        // Animamos el color del texto de bravo
+        // Animamos el color del texto de bravo jugando con el alfa
         ValueAnimator animTexto = ValueAnimator.ofArgb(transparente, negro, transparente);
         animTexto.setDuration(3000);
         animTexto.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -237,6 +265,7 @@ public class Juego extends AppCompatActivity{
         });
         animTexto.start();
 
+        // Animamos la escala del texto
         ValueAnimator animEscala = ValueAnimator.ofFloat(1, 2,1);
         animEscala.setDuration(3000);
         animEscala.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
     tools:context=".Juego">
@@ -124,6 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:enabled="true"
             android:text="@string/volverjugar" />
 
         <Space
@@ -136,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:enabled="true"
             android:text="@string/pantalla_inicio" />
 
         <Space
@@ -147,6 +149,7 @@
             android:id="@+id/btnSalirJuego"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="true"
             android:text="@string/salir" />
     </LinearLayout>
 
@@ -159,7 +162,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/forma_redondeada"
         android:contentDescription="@string/ivdestino1"
         android:foregroundGravity="center"
@@ -172,7 +175,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:layout_toEndOf="@+id/ivDestino3"
         android:layout_toRightOf="@+id/ivDestino3"
         android:background="@drawable/forma_redondeada"
@@ -188,7 +191,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="30dp"
         android:layout_toEndOf="@+id/ivDestino1"
         android:layout_toRightOf="@+id/ivDestino1"
         android:background="@drawable/forma_redondeada"
