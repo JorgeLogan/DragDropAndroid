@@ -1,10 +1,9 @@
 package com.example.actividad2_1;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         // Capturamos los botones del juego
-        btnEmpezar = (Button)findViewById(R.id.btnJugar);
+        btnEmpezar = (Button)findViewById(R.id.btnVolverJugar);
         btnSalir= (Button)findViewById(R.id.btnSalir);
 
         // Preparamos el sonido del boton
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity{
     public void iniciarJuego(){
         this.animadorLogan.cerrar();
         Intent intent = new Intent(this, Juego.class);
-        startActivity(intent);
+        startActivityForResult(intent, 100);
     }
 
     // Creo una clase para ralentizar el inicio de la actividad para que el ladrido y su sonido
@@ -112,5 +111,13 @@ public class MainActivity extends AppCompatActivity{
             Log.d("Pruebas", "Activada la nueva animacion");
             animadorLogan = new AnimadorImagenes(this, ivLogan, imgsReposo, imgsLadrando);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 100 && resultCode == RESULT_OK)  this.finish();
+        else if(requestCode == 100 && resultCode == 1000)  this.iniciarJuego();
     }
 }

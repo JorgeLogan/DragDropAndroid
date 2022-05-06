@@ -3,4 +3,5 @@
     <dimen name="minimo">32dp</dimen>
     <dimen name="medio">64dp</dimen>
     <dimen name="grande">100dp</dimen>
+    <dimen name="posX_botones">100dp</dimen>
 </resources>

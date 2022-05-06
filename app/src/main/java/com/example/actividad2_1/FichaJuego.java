@@ -2,11 +2,16 @@ package com.example.actividad2_1;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.renderscript.Sampler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
@@ -17,7 +22,12 @@ public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
     private long tiempoVolverOrigen = 1000;
     private boolean conseguido = false;
 
+    // Atributo estatico de la actividad para poder llamar metodos suyos
+    private static Juego juego;
+
+    // Getter de conseguido y Setter de juego
     public boolean isConseguido(){ return this.conseguido; }
+    public static void setJuego(Juego j){ juego = j; }
 
     // Como las coordenadas centrales hay que calcularlas uso 2 variables
     private float destinoX = 0;
@@ -32,7 +42,6 @@ public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
     // Setter para la imagen. No necesito mas
     public void setImagenDestino(ImageView imagenDestino) {
         this.imagenDestino = imagenDestino;
-
         this.setImageDrawable(imagenDestino.getDrawable());
     }
 
@@ -64,7 +73,6 @@ public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(puedeCogerse == false) return false;
 
-
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     Log.d("Pruebas", "Moviendo " + motionEvent.getAction() + " " + view.getX() + " " + motionEvent.getRawX());
                     if(inicioX == -1){
@@ -89,11 +97,14 @@ public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
                     if(comprobarDestino()){
                         Log.d("Pruebas", "OK!!!!!. Ficha: " + (view.getX() + view.getWidth()/2)
                                 +"," + (view.getY() + view.getHeight()/2) + "  Destino: " + (imagenDestino.getX() + imagenDestino.getWidth()/2 )+ "," + imagenDestino.getY());
+                        fichaDestinoOK();
 
-
+                        // Bloqueamos el control del objeto
+                        puedeCogerse = false;
                     }else{
                         Log.d("Pruebas", "No esta en el sitio. Ficha: " + (view.getX() + view.getWidth()/2)
                                 +"," + (view.getY() + view.getHeight()/2) + "  Destino: " + (imagenDestino.getX() + imagenDestino.getWidth()/2 )+ "," + imagenDestino.getY());
+                        fichaDestinoMal();
                         volverInicio();
                     }
                 }
@@ -152,5 +163,46 @@ public class FichaJuego extends androidx.appcompat.widget.AppCompatImageView {
             }
         };
         t.start();
+    }
+
+    // Metodo para llamar a la clase principal cuando la ficha llege bien
+    public void fichaDestinoOK(){
+        animFichaFinal();
+        animDestino();
+        juego.posicionOK();
+
+    }
+
+    private void animFichaFinal() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ObjectAnimator aAlfa = ObjectAnimator.ofArgb(this.getBackground(), "alpha", 1,0);
+            aAlfa.setDuration(750);
+            aAlfa.start();
+        }
+    }
+
+    private void animDestino(){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ObjectAnimator aEscalaX = ObjectAnimator.ofFloat(this.imagenDestino, "scaleX",1,2,0);
+            ObjectAnimator aEscalaY = ObjectAnimator.ofFloat(this.imagenDestino, "scaleY",1,2,0);
+            ObjectAnimator aAlfa = ObjectAnimator.ofArgb(this.imagenDestino, "alpha", 1, 0);
+
+            aEscalaX.setDuration(1000);
+            aEscalaY.setDuration(1000);
+            aAlfa.setDuration(1000);
+            aEscalaX.start();
+            aEscalaY.start();
+            aAlfa.start();
+        }
+
+    }
+
+    //Metodo para llamar la clase principal cuando la ficha no este en posicion
+    public void fichaDestinoMal(){
+        try{
+            juego.posicionMal();
+        }catch (Exception e){
+            Log.d("Pruebas", e.getMessage());
+        }
     }
 }

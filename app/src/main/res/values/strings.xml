@@ -7,4 +7,10 @@
     <string name="ivdestino1">ivDestino1</string>
     <string name="ivdestino2">ivDestino2</string>
     <string name="ivdestino3">ivDestino3</string>
+    <string name="intentos">Intentos</string>
+    <string name="bravo">¡¡ Bravo !!</string>
+    <string name="salir">Salir</string>
+    <string name="volverjugar">Volver a jugar</string>
+    <string name="pantalla_inicio">Volver a inicio</string>
+
 </resources>
